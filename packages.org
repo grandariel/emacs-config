@@ -1,0 +1,125 @@
+
+
+* Emacs
+** Basic look
+#+BEGIN_SRC elisp
+  (scroll-bar-mode -1)
+  (tool-bar-mode   -1)
+  (tooltip-mode    -1)
+  (menu-bar-mode   -1)
+#+END_SRC
+
+** Font
+#+BEGIN_SRC elisp
+(add-to-list 'default-frame-alist '(font . "mononoki-12"))
+(add-to-list 'default-frame-alist '(height . 24))
+(add-to-list 'default-frame-alist '(width . 80))
+#+END_SRC
+
+** Theme
+#+BEGIN_SRC elisp
+  (use-package doom-themes
+    :ensure t
+    :config
+    (load-theme 'doom-solarized-light t))
+#+END_SRC
+
+** Config
+#+BEGIN_SRC elisp
+  (setq backup-directory-alist '(("" . "~/.emacs.d/emacs-backup")))
+#+END_SRC
+
+* General
+#+BEGIN_SRC elisp
+  (use-package general
+    :ensure t
+    :config (general-define-key
+    :states '(normal visual insert emacs)
+    :prefix "SPC"
+    :non-normal-prefix "M-SPC"
+    ;; "/"   '(counsel-rg :which-key "ripgrep") ; You'll need counsel package for this
+    "TAB" '(switch-to-prev-buffer :which-key "previous buffer")
+    "SPC" '(helm-M-x :which-key "M-x")
+    "ff"  '(helm-find-files :which-key "find files")
+    ;; Buffers
+    "bb"  '(helm-buffers-list :which-key "buffers list")
+    ;; Window
+    "wl"  '(windmove-right :which-key "move right")
+    "wh"  '(windmove-left :which-key "move left")
+    "wk"  '(windmove-up :which-key "move up")
+    "wj"  '(windmove-down :which-key "move bottom")
+    "w/"  '(split-window-right :which-key "split right")
+    "w-"  '(split-window-below :which-key "split bottom")
+    "wd"  '(delete-window :which-key "delete window")
+    ;; Others
+    "'"  '(ansi-term :which-key "open terminal")
+  ))
+#+END_SRC
+
+* Which-key
+#+BEGIN_SRC elisp
+  (use-package which-key
+    :ensure t
+    :init
+    (setq which-key-separator " ")
+    (setq which-key-prefix-prefix "+")
+    :config
+    (which-key-mode 1))
+#+END_SRC
+
+* Evil
+#+BEGIN_SRC elisp
+  (use-package evil
+    :ensure t
+    :config
+    (evil-mode 1))
+#+END_SRC
+
+* Helm
+#+BEGIN_SRC elisp
+  (use-package helm
+    :ensure t
+    :init
+    (setq helm-M-x-fuzzy-match t
+    helm-mode-fuzzy-match t
+    helm-buffers-fuzzy-matching t
+    helm-recentf-fuzzy-match t
+    helm-locate-fuzzy-match t
+    helm-semantic-fuzzy-match t
+    helm-imenu-fuzzy-match t
+    helm-completion-in-region-fuzzy-match t
+    helm-candidate-number-list 150
+    helm-split-window-in-side-p t
+    helm-move-to-line-cycle-in-source t
+    helm-echo-input-in-header-line t
+    helm-autoresize-max-height 0
+    helm-autoresize-min-height 20)
+    :config
+    (helm-mode 1)) 
+#+END_SRC
+
+* Projectile
+#+BEGIN_SRC elisp
+  (use-package projectile
+    :ensure t
+    :init
+    (setq projectile-require-project-root nil)
+    :config
+    (projectile-mode 1))
+#+END_SRC
+
+* Neotree
+#+BEGIN_SRC elisp
+  (use-package all-the-icons :ensure t)
+
+  (use-package neotree
+    :ensure t
+    :init
+    (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
+#+END_SRC
+
+* Magit
+#+BEGIN_SRC elisp
+  (use-package magit
+    :ensure t)
+#+END_SRC
