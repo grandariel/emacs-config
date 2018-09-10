@@ -1,1 +1,3 @@
 emacs-backup/
+elpa/
+*.el
