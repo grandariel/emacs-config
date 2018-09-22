@@ -22,7 +22,7 @@
   (use-package doom-themes
     :ensure t
     :config
-    (load-theme 'doom-solarized-light t))
+    (load-theme 'doom-city-lights t))
 #+END_SRC
 
 ** Config
@@ -74,10 +74,14 @@
 
 * Evil
 #+BEGIN_SRC emacs-lisp
-  (use-package evil
+    (use-package evil
+      :ensure t
+      :config
+      (evil-mode 1))
+  (use-package evil-surround
     :ensure t
     :config
-    (evil-mode 1))
+    (global-evil-surround-mode 1))
 #+END_SRC
 
 * Helm
@@ -134,3 +138,28 @@
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 #+END_SRC
 
+* Wind Move
+#+BEGIN_SRC emacs-lisp
+  (when (fboundp 'windmove-default-keybindings)
+  (windmove-default-keybindings 'meta))
+#+END_SRC
+
+* Dashboard
+#+BEGIN_SRC emacs-lisp
+  (use-package dashboard
+    :ensure t
+    :config
+    (dashboard-setup-startup-hook))
+
+  (setq dashboard-items '((recents  . 5)
+			  (bookmarks . 5)
+			  (projects . 5)
+			  (agenda . 5)
+			  (registers . 5)))
+#+END_SRC
+
+* Try
+#+BEGIN_SRC emacs-lisp
+  (use-package try
+    :ensure t)
+#+END_SRC
